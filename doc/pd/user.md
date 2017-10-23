@@ -13,7 +13,7 @@ token 更新机制
 更新
 1. 用户登录 创建（更新）
 2. 用户退出 删除
-3. 用户过期 判断refreshToken 刷新 token
+3. 用户过期 判断refreshToken 刷新 2个 token
 
 
 token 生成方式
