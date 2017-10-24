@@ -62,11 +62,19 @@ response: {
 
 ```
 
-/api/checkUserVaild : post
+
+/api/refreshToken : post
 ```json
+request: {
+  userId : "123123",
+  token : "asfd",
+  refreshToken: "asdasdaq",
+  ts : "12312312321"      // 时间戳
+}
 
+
+response: {
+  token: "asdasd",
+  refreshToken : "asdasdas"
+}
 ```
-
-
-errorCode:
-

@@ -6,51 +6,29 @@ buildscript {
     }
     dependencies {
         classpath(
-                'org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE',
-                'org.unbroken-dome.gradle-plugins:gradle-testsets-plugin:1.0.2'
+                'org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE',
         )
     }
 }
 
-apply plugin: 'org.unbroken-dome.test-sets'
-apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'java'
-apply plugin: 'jetty'
 apply plugin: 'war'
+apply plugin: 'idea'
+
+
+
+apply plugin: 'application'
+applicationDefaultJvmArgs = [ "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" ]
+
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-testSets {
-    integrationTest { dirName = 'integration-test' }
-}
-
-project.integrationTest {
-    outputs.upToDateWhen { false }
-}
-
-check.dependsOn integrationTest
-integrationTest.mustRunAfter test
-
-tasks.withType(Test) {
-    reports.html.destination = file("${reporting.baseDir}/${name}")
-}
-
-//bootRepackage {
-//    mainClass = 'demo.Application'
-//}
-
 group 'com.ypacm'
 version '1.0-SNAPSHOT'
 
-war {
-    baseName = 'ypuser'
-    version =  '0.5.0'
-}
 
-configurations {
-    providedRuntime
-}
 
 repositories {
     maven {url "http://maven.aliyun.com/nexus/content/groups/public"}
