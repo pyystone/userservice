@@ -18,4 +18,5 @@ token 更新机制
 
 token 生成方式
 
-MD5(userid + password + timestamp + sign_key)
+accessToken ： MD5(userid + password + timestamp + sign_key)
+refreshToken： MD5(userid + password + timestamp + sign_key2)

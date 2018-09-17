@@ -1,6 +1,6 @@
 package com.ypacm.user.db;
 
-import com.ypacm.user.model.User;
+import com.ypacm.user.data.entity.User;
 
 public interface UserDAO {
 
