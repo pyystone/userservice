@@ -24,17 +24,6 @@ TABLE_TOKEN
 |refreshtoken|varchar||
 
 
-TABLE_VERSION
-
-
-|字段|类型|描述|
-|:---|:---|:---|
-|verison|int|DB 版本|
-
-
-
-
-
 SQL:
 
 create table table_user (

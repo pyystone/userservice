@@ -1,5 +1,7 @@
 package com.ypacm.user.data.entity;
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,15 +14,12 @@ public class User {
     @GeneratedValue
     private long userId;
 
-    @Column(nullable = false)
-    private String account;
-
-    @Column(nullable = false)
     private String nickName;
 
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String email;
 
     private String QQ;
@@ -30,12 +29,10 @@ public class User {
 
     public User() {}
 
-    public User(String account, String nickName, String password) {
-        this.account = account;
-        this.nickName = nickName;
+    public User(String email, String password) {
+        this.email = email;
         this.password = password;
     }
-
 
 
     public long getUserId() {
@@ -44,14 +41,6 @@ public class User {
 
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String name) {
-        this.account = name;
     }
 
     public String getNickName() {

@@ -1,10 +1,10 @@
 #### api_list
 | API名字 | API URL |
 | :---- | :---- |
-| 用户注册 | /api/register |
-| 用户登录 | /api/login |
-| 用户信息 | /api/getUserInfo |
-| 忘记密码 | /api/forgetPassword |
+| 用户注册 | /api/user/register |
+| 用户登录 | /api/user/login |
+| 用户信息 | /api/user/{id} |
+| 忘记密码 | /api/user/forget |
 
 
 
@@ -37,7 +37,7 @@
 
 |字段名|字段说明|
 |----|----|
-|account| 用户名|
+|email|邮箱|
 |pwd|(MD5(用户密码)|
 
 
