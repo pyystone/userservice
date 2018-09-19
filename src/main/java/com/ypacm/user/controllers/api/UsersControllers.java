@@ -37,8 +37,6 @@ public class UsersControllers {
     }
 
 
-
-
     @ApiOperation(value = "注册用户",notes = "根据邮箱 account 密码注册用户")
     @PostMapping(value = "/register")
     public String Register(@RequestBody @Valid UserRegister ur) {

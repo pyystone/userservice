@@ -1,7 +1,5 @@
 package com.ypacm.user.data.entity;
 
-import org.hibernate.validator.constraints.Email;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +28,7 @@ public class User {
 
     private String QQ;
 
-    private String head_url;
+    private String headUrl;
 
 
     public User() {}
@@ -81,11 +79,11 @@ public class User {
         this.QQ = QQ;
     }
 
-    public String getHead_url() {
-        return head_url;
+    public String getHeadUrl() {
+        return headUrl;
     }
 
-    public void setHead_url(String head_url) {
-        this.head_url = head_url;
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
     }
 }
