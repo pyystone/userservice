@@ -1,4 +1,4 @@
-package com.ypacm.user.data.requestbody;
+package com.ypacm.user.model.requestbody;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

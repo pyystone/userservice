@@ -1,6 +1,4 @@
-package com.ypacm.user.data.entity;
-
-import org.springframework.context.annotation.Primary;
+package com.ypacm.user.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

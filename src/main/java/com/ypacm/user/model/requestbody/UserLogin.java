@@ -1,9 +1,12 @@
-package com.ypacm.user.data.requestbody;
+package com.ypacm.user.model.requestbody;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 /**
  * Created by pyystone on 16/11/24.
@@ -30,7 +33,8 @@ public class UserLogin {
 
     @ApiModelProperty(required = true, value = "随机10位数字")
     @NotNull(message = "输入信息错误")
-    private String r;
+    @Range(min = 100000000,max = 999999999)
+    private long r;
 
 
     public String getEmail() {
@@ -57,11 +61,11 @@ public class UserLogin {
         this.ts = ts;
     }
 
-    public String getR() {
+    public long getR() {
         return r;
     }
 
-    public void setR(String r) {
+    public void setR(long r) {
         this.r = r;
     }
 }

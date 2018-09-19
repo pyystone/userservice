@@ -1,5 +1,6 @@
 package com.ypacm.user.error;
 
+import com.ypacm.user.model.responsebody.BaseResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,42 +21,38 @@ import java.net.BindException;
 public class ExceptionControllerAdvice {
 
     @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(UserException.class)
+    @ResponseBody
+    public BaseResponse handleUserException(UserException e) {
+        return new BaseResponse(e.getCode(),e.getMessage());
+    }
+
+
+    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(BindException.class)
     @ResponseBody
-    public ErrorInfo handleBindException(BindException e) {
-        ErrorInfo info = new ErrorInfo();
-        info.setCode(ErrorInfo.ERROR);
-        info.setMessage(e.getMessage());
-        return info;
+    public BaseResponse handleBindException(BindException e) {
+        return new BaseResponse(BaseResponse.ERROR,e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ValidationException.class)
     @ResponseBody
-    public ErrorInfo handleBindException(ValidationException e) {
-        ErrorInfo info = new ErrorInfo();
-        info.setCode(ErrorInfo.ERROR);
-        info.setMessage(e.getMessage());
-        return info;
+    public BaseResponse handleBindException(ValidationException e) {
+        return new BaseResponse(BaseResponse.ERROR,e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
-    public ErrorInfo handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        ErrorInfo info = new ErrorInfo();
-        info.setCode(ErrorInfo.ERROR);
-        info.setMessage(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
-        return info;
+    public BaseResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+        return new BaseResponse(BaseResponse.ERROR,e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public ErrorInfo handleException(Exception e) {
-        ErrorInfo info = new ErrorInfo();
-        info.setCode(ErrorInfo.ERROR);
-        info.setMessage("非法请求");
-        return info;
+    public BaseResponse handleException(Exception e) {
+        return new BaseResponse(BaseResponse.ERROR,"非法请求");
     }
 }

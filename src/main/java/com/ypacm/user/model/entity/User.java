@@ -1,4 +1,4 @@
-package com.ypacm.user.data.entity;
+package com.ypacm.user.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

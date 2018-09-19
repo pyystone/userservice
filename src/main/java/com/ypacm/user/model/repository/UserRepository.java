@@ -1,7 +1,7 @@
-package com.ypacm.user.data.repository;
+package com.ypacm.user.model.repository;
 
 
-import com.ypacm.user.data.entity.User;
+import com.ypacm.user.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,6 +1,6 @@
-package com.ypacm.user.data.repository;
+package com.ypacm.user.model.repository;
 
-import com.ypacm.user.data.entity.Token;
+import com.ypacm.user.model.entity.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Created by pyystone on 16/11/24.
