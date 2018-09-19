@@ -1,5 +1,11 @@
 package com.ypacm.user.utils;
-
+/**
+ * Created by pyystone on 16/11/24.
+ * email: pyystone@163.com
+ * QQ: 862429936
+ * github: https://github.com/pyystone
+ * code shelf life : forever :-D
+ */
 public class UtilToken {
 
     private static String ACCESS_SIGN_KEY   = "stone_sign_key";

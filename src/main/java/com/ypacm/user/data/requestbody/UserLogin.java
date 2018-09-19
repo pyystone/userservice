@@ -5,7 +5,13 @@ import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
-
+/**
+ * Created by pyystone on 16/11/24.
+ * email: pyystone@163.com
+ * QQ: 862429936
+ * github: https://github.com/pyystone
+ * code shelf life : forever :-D
+ */
 @ApiModel(description = "用户登录")
 public class UserLogin {
 

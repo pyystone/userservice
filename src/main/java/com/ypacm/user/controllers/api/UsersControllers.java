@@ -12,7 +12,13 @@ import javax.validation.Valid;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Created by pyystone on 16/11/24.
+ * email: pyystone@163.com
+ * QQ: 862429936
+ * github: https://github.com/pyystone
+ * code shelf life : forever :-D
+ */
 @RestController
 @RequestMapping(value="/user")
 public class UsersControllers {

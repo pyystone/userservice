@@ -10,10 +10,16 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
 /**
+ * Created by pyystone on 16/11/24.
+ * email: pyystone@163.com
+ * QQ: 862429936
+ * github: https://github.com/pyystone
+ * code shelf life : forever :-D
+ *
  * http://localhost:8081/swagger-ui.html
- */
+ * */
+
 @Configuration
 @EnableSwagger2
 
