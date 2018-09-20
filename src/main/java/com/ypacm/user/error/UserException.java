@@ -1,12 +1,12 @@
 package com.ypacm.user.error;
 
-import com.ypacm.user.model.responsebody.RSData;
+import com.ypacm.user.net.response.RSData;
 
 public class UserException extends Exception {
-    private long code = RSData.ERROR;
+    private int code = RSData.SystemError.DATA_ERROR;
     private String message;
 
-    public UserException(long code, String message) {
+    public UserException(int code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -16,7 +16,7 @@ public class UserException extends Exception {
         this.message = message;
     }
 
-    public long getCode() {
+    public int getCode() {
         return code;
     }
 

@@ -1,6 +1,6 @@
 package com.ypacm.user.error;
 
-import com.ypacm.user.model.responsebody.RSData;
+import com.ypacm.user.net.response.RSData;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,7 +24,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(UserException.class)
     @ResponseBody
     public RSData handleUserException(UserException e) {
-        return new RSData(e.getCode(),e.getMessage());
+        return RSData.buildRSData(e.getCode(),e.getMessage());
     }
 
 
@@ -32,27 +32,27 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(BindException.class)
     @ResponseBody
     public RSData handleBindException(BindException e) {
-        return new RSData(RSData.ERROR,e.getMessage());
+        return RSData.buildRSData(RSData.SystemError.DATA_ERROR,e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(ValidationException.class)
     @ResponseBody
     public RSData handleBindException(ValidationException e) {
-        return new RSData(RSData.ERROR,e.getMessage());
+        return RSData.buildRSData(RSData.SystemError.DATA_ERROR,e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     public RSData handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        return new RSData(RSData.ERROR,e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+        return RSData.buildRSData(RSData.SystemError.DATA_ERROR,e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
     }
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public RSData handleException(Exception e) {
-        return new RSData(RSData.ERROR,"非法请求");
+        return RSData.buildRSData(RSData.SystemError.DATA_ERROR,"非法请求");
     }
 }

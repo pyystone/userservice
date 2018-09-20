@@ -1,6 +1,6 @@
-package com.ypacm.user.model.entity;
+package com.ypacm.user.entity;
 
-import com.ypacm.user.model.responsebody.RSUser;
+import com.ypacm.user.net.response.RSUser;
 import com.ypacm.user.utils.UtilEncrypt;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -1,7 +1,7 @@
-package com.ypacm.user.model.repository;
+package com.ypacm.user.repository;
 
 
-import com.ypacm.user.model.entity.User;
+import com.ypacm.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,8 +16,4 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     User findByEmail(String email);
 
-    User findByPassword(String password);
-
-    @Query("from User u where u.nickName=:nickName")
-    User findUserEntity(@Param("nickName") String nickName);
 }

@@ -1,4 +1,4 @@
-package com.ypacm.user.model.responsebody;
+package com.ypacm.user.net.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,25 +10,25 @@ import io.swagger.annotations.ApiModelProperty;
  * github: https://github.com/pyystone
  * code shelf life : forever :-D
  */
-@ApiModel
+@ApiModel(value = "返回的用户信息")
 public class RSUser {
 
-    @ApiModelProperty(value = "用户id", dataType = "long")
+    @ApiModelProperty(name = "用户id", value = "用户id", dataType = "long", example = "123456")
     private long uid;
 
-    @ApiModelProperty(value = "用户昵称", dataType = "long")
+    @ApiModelProperty(name = "用户昵称", value = "用户昵称", dataType = "long", example = "ypacm")
     private String nickName;
 
-    @ApiModelProperty(value = "用户密码", dataType = "long")
+    @ApiModelProperty(name = "用户密码", value = "用户密码", dataType = "long", example = "202CB962AC59075B964B07152D234B70")
     private String password;
 
-    @ApiModelProperty(value = "用户邮箱", dataType = "long")
+    @ApiModelProperty(name = "用户邮箱", value = "用户邮箱", dataType = "long", example = "test@ypacm.com")
     private String email;
 
-    @ApiModelProperty(value = "QQ", dataType = "String")
+    @ApiModelProperty(name = "QQ", value = "QQ", dataType = "String", example = "290454391")
     private String QQ;
 
-    @ApiModelProperty(value = "头像地址", dataType = "String")
+    @ApiModelProperty(name = "头像地址", value = "头像地址", dataType = "String", example = "http://ypacm.com/icon.png")
     private String headUrl;
 
     public long getUid() {
