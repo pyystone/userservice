@@ -25,7 +25,7 @@ public class RQRegister {
     @ApiModelProperty(required = true,value = "注册密码")
     @NotNull(message = "密码不能为空")
     @SafeHtml(message = "输入信息错误")
-    private String password;
+    private String pwd;
 
 
     public String getEmail() {
@@ -36,11 +36,11 @@ public class RQRegister {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 }

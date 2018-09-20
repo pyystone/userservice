@@ -72,7 +72,7 @@ public class UsersControllers {
     public RSData Register(@RequestBody @Valid RQRegister ur) throws UserException {
 
         if( !User.isValidEmail(ur.getEmail()) ||
-            !User.isvalidPassword(ur.getPassword())) {
+            !User.isvalidPassword(ur.getPwd())) {
             throw new UserException("参数错误");
         }
 
@@ -83,7 +83,7 @@ public class UsersControllers {
 
         user = new User();
         user.setEmail(ur.getEmail());
-        user.setPassword(User.generatePassword(ur.getPassword()));
+        user.setPassword(User.generatePassword(ur.getPwd()));
 
         userRepository.save(user);
         return new RSData();
@@ -94,7 +94,7 @@ public class UsersControllers {
     public RSLogin Login(@RequestBody @Valid RQLogin login) throws UserException {
 
         if( !User.isValidEmail(login.getEmail()) ||
-            !User.isvalidPassword(login.getPassword()) ||
+            !User.isvalidPassword(login.getPwd()) ||
             !User.isvalidR(login.getR()) ||
             !User.isvalidTS(login.getTs())) {
             throw new UserException("参数错误");
@@ -106,7 +106,7 @@ public class UsersControllers {
         if (user == null ||
                 !UtilEncrypt.MD5(
                 user.getPassword() + String.valueOf(login.getR()) + login.getTs()
-                                ).equals(login.getPassword())
+                                ).equals(login.getPwd())
                 ) throw new UserException("账号或密码错误");
 
         // 生成Token
@@ -122,6 +122,9 @@ public class UsersControllers {
     @PostMapping(value = "refresh")
     public RSLogin refresh(@RequestBody @Valid RQRefresh ur) {
         // Token 刷新逻辑
+//        Token tk = tokenRepository.findOne(ur.getUid());
+//        if ()
+//        Token.isValidRefreshToken(ur.getRtk())
         return new RSLogin("","token");
     }
 

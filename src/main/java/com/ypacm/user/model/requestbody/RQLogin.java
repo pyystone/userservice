@@ -25,7 +25,7 @@ public class RQLogin {
     @ApiModelProperty(required = true, dataType = "String", example = "202CB962AC59075B964B07152D234B70", value = "登录密码 加密策略 MD5(MD5(用户密码)+ts+r)")
     @SafeHtml(message = "输入信息错误")
     @NotNull(message = "输入信息错误")
-    private String password;
+    private String pwd;
 
     @ApiModelProperty(required = true, dataType = "String", example = "1537462795", value = "当前时间戳")
     @NotNull(message = "输入信息错误")
@@ -45,14 +45,6 @@ public class RQLogin {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getTs() {
         return ts;
     }
@@ -67,5 +59,13 @@ public class RQLogin {
 
     public void setR(long r) {
         this.r = r;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 }
