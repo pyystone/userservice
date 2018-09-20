@@ -1,20 +1,26 @@
 package com.ypacm.user.controllers.api;
 
-import com.ypacm.user.model.responsebody.BaseResponse;
+import com.ypacm.user.error.ExceptionFormat;
+import com.ypacm.user.model.entity.Token;
+import com.ypacm.user.model.repository.TokenRepository;
+import com.ypacm.user.model.responsebody.RSData;
 import com.ypacm.user.model.entity.User;
 import com.ypacm.user.model.repository.UserRepository;
-import com.ypacm.user.model.requestbody.UserLogin;
-import com.ypacm.user.model.requestbody.UserRefresh;
-import com.ypacm.user.model.requestbody.UserRegister;
+import com.ypacm.user.model.requestbody.RQLogin;
+import com.ypacm.user.model.requestbody.RQRefresh;
+import com.ypacm.user.model.requestbody.RQRegister;
 import com.ypacm.user.error.UserException;
-import com.ypacm.user.model.responsebody.LoginResponse;
+import com.ypacm.user.model.responsebody.RSLogin;
+import com.ypacm.user.model.responsebody.RSUser;
 import com.ypacm.user.utils.UtilEncrypt;
-import com.ypacm.user.utils.UtilUser;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 /**
  * Created by pyystone on 16/11/24.
@@ -28,31 +34,45 @@ import javax.validation.Valid;
 public class UsersControllers {
 
     private final UserRepository userRepository;
+    private final TokenRepository tokenRepository;
 
     @Autowired
-    public UsersControllers(UserRepository userRepository) {
+    public UsersControllers(UserRepository userRepository, TokenRepository tokenRepository) {
         this.userRepository = userRepository;
+        this.tokenRepository = tokenRepository;
     }
 
 
-    // 获得用户信息
     @ApiOperation(value = "获得用户信息",notes = "根据用户id获取用户信息")
-    @GetMapping(value = "/{id}")
-    public User getUser(@PathVariable Long id) throws UserException {
-        User user = userRepository.findOne(id);
-        if (user != null) {
-            return user;
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", dataType = "int", required = true, value = "用户id"),
+            @ApiImplicitParam(name = "tk", dataType = "String", required = true, value = "用户token")
+    })
+    @GetMapping(value = "/detail")
+    public RSData<RSUser> getUser(@PathParam(value = "id") Long id, @PathParam(value = "tk") String token) {
+        Token tk = tokenRepository.findOne(id);
+        if (tk == null || !tk.getToken().equals(token)) {
+            return ExceptionFormat.builderErrorResult(ExceptionFormat.User.LOGIN_ERROR,RSUser.class);
         }
-        throw new UserException("未找到这个用户信息");
+
+        if (!Token.isValidToken(tk.getTimestamp())) {
+            return ExceptionFormat.builderErrorResult(ExceptionFormat.User.RELOGIN,RSUser.class);
+        }
+
+        User user = userRepository.findOne(id);
+        if (user == null) {
+            return ExceptionFormat.builderErrorResult(ExceptionFormat.System.DATA_ERROR,RSUser.class);
+        }
+        return new RSData<>(user.getRSUser());
     }
 
 
     @ApiOperation(value = "注册用户",notes = "根据邮箱 account 密码注册用户")
     @PostMapping(value = "/register")
-    public BaseResponse Register(@RequestBody @Valid UserRegister ur) throws UserException {
+    public RSData Register(@RequestBody @Valid RQRegister ur) throws UserException {
 
-        if( !UtilUser.isVaildEmail(ur.getEmail()) ||
-            !UtilUser.isVaildPassword(ur.getPassword())) {
+        if( !User.isValidEmail(ur.getEmail()) ||
+            !User.isvalidPassword(ur.getPassword())) {
             throw new UserException("参数错误");
         }
 
@@ -63,20 +83,20 @@ public class UsersControllers {
 
         user = new User();
         user.setEmail(ur.getEmail());
-        user.setPassword(UtilUser.generatePassword(ur.getPassword()));
+        user.setPassword(User.generatePassword(ur.getPassword()));
 
         userRepository.save(user);
-        return new BaseResponse(BaseResponse.OK);
+        return new RSData();
     }
 
     @ApiOperation(value = "用户登录")
     @PostMapping(value = "/login")
-    public LoginResponse Login(@RequestBody @Valid UserLogin login) throws UserException {
+    public RSLogin Login(@RequestBody @Valid RQLogin login) throws UserException {
 
-        if( !UtilUser.isVaildEmail(login.getEmail()) ||
-            !UtilUser.isVaildPassword(login.getPassword()) ||
-            !UtilUser.isVaildR(login.getR()) ||
-            !UtilUser.isVaildTS(login.getTs())) {
+        if( !User.isValidEmail(login.getEmail()) ||
+            !User.isvalidPassword(login.getPassword()) ||
+            !User.isvalidR(login.getR()) ||
+            !User.isvalidTS(login.getTs())) {
             throw new UserException("参数错误");
         }
 
@@ -90,15 +110,19 @@ public class UsersControllers {
                 ) throw new UserException("账号或密码错误");
 
         // 生成Token
-
-        return new LoginResponse("","token");
+        Token tk = new Token(user.getUserId(),
+                    Token.generatorAccessToken(user.getUserId(),user.getPassword()),
+                    Token.generatorRefreshToken(user.getUserId(),user.getPassword()),
+                    System.currentTimeMillis());
+        tokenRepository.save(tk);
+        return new RSLogin(tk.getToken(),tk.getRefreshToken());
     }
 
     @ApiOperation(value = "刷新Token")
     @PostMapping(value = "refresh")
-    public LoginResponse refresh(@RequestBody @Valid UserRefresh ur) {
+    public RSLogin refresh(@RequestBody @Valid RQRefresh ur) {
         // Token 刷新逻辑
-        return new LoginResponse("","token");
+        return new RSLogin("","token");
     }
 
 }

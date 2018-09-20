@@ -3,7 +3,9 @@
 | :---- | :---- |
 | 用户注册 | /api/user/register |
 | 用户登录 | /api/user/login |
-| 用户信息 | /api/user/{id} |
+| 用户信息 | /api/user/detail |
+| 更新token| /api/user/refresh|
+| 确认token是否有效|/api/user/check|
 | 忘记密码 | /api/user/forget |
 
 
