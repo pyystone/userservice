@@ -1,4 +1,4 @@
-package com.ypacm.user.error;
+package com.ypacm.user.net.error;
 
 import com.ypacm.user.net.response.RSData;
 import org.springframework.http.HttpStatus;

@@ -1,9 +1,4 @@
-package com.ypacm.user.error;
-
-import com.google.common.collect.Maps;
-import com.ypacm.user.net.response.RSData;
-
-import java.util.Map;
+package com.ypacm.user.net.error;
 
 /**
  * Created by pyystone on 16/11/24.

@@ -1,16 +1,13 @@
 package com.ypacm.user.controllers.api;
 
-import com.ypacm.user.entity.Token;
 import com.ypacm.user.net.response.RSData;
-import com.ypacm.user.entity.User;
 import com.ypacm.user.net.request.RQLogin;
 import com.ypacm.user.net.request.RQRefresh;
 import com.ypacm.user.net.request.RQRegister;
-import com.ypacm.user.error.UserException;
+import com.ypacm.user.net.error.UserException;
 import com.ypacm.user.net.response.RSToken;
 import com.ypacm.user.service.impl.TokenServiceImpl;
 import com.ypacm.user.service.impl.UserServiceImpl;
-import com.ypacm.user.utils.UtilEncrypt;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
